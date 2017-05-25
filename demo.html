@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<title>磁盘调度算法</title>
+<head>
+<script>
+
+"use strict"
+var sortArray =	Array();
+function ClosestNext(a)
+{
+	if(Array.isAray(a))
+	{
+		var i; 
+		for(i=0;i<a.length;i++)
+		{
+			  
+			
+		}
+		return i;
+	}
+	
+}
+function FCFS(a)
+{
+	
+	var sum=0,j,i;
+	if(Array.isArray(a))
+		{
+			for(i=0,j=1;j<a.length;i++,j++)
+				{
+					sum+=Math.abs(a[j]-a[i]);
+				}		
+			return sum;
+		}
+	else
+	{
+		alert("Not An Array!");
+		return 0;
+		
+	}
+	
+		
+}
+
+function SSTF(a)
+{
+ 	if(Array.isArray(a))
+	{
+	  	var sum=0;
+		var i=j=0;
+		for(;;)
+		{
+		    j = ClosestNext(a);
+			sum+=Math.abs(a[j]-a[i]);
+			var temp=a.splice(i,1);
+			sortArray.push(temp[0]);
+			if(i<j){i=j-1;}
+			else{i=j;}
+			if(a.length==1)
+			{
+				break;
+			}
+		}
+	
+		return sum;
+	}
+	else
+	{
+		alert("Not An Array!");
+		return 0;
+		
+	}
+}
+
+function SCAN(a)
+{
+
+  if(Array.isArray(a))
+	{
+		return 0;
+	}
+	else
+	{
+		alert("Not An Array!");
+		return 0;
+		
+	}
+
+}	
+</script>
+
+
+
+<script>
+"use strict"
+function shot()
+{
+var nextname="next";
+var values = Array();                   //存要访问磁道的数组
+var sum = 0;                             //移动磁道数
+for(var i="0";i<6;i++)
+	{
+	nextname="next"+i;
+	values[i] = document.getElementById(nextname).value;
+	}
+if(document.getElementById("FCFS").checked == true)
+{
+  var k1= FCFS(values);             //返回移动磁道数
+  document.write("移动磁道数为:  "+k1);
+  document.write("</br></br>");
+  document.write("访问磁道顺序为:");
+  for(var i=0;i<values.length;i++)
+  {
+     document.write(values[i]+"\n");
+  }
+}
+else if(document.getElementById("SSTF").checked == true)
+{
+   var k2 = SSTF(values);
+   document.write("移动磁道数为:  "+k2);
+  document.write("</br></br>");
+  document.write("访问磁道顺序为:");
+}
+else if(document.getElementById("SCAN").checked == true)
+{
+   var k3 = SCAN(values);
+   document.write("移动磁道数为:  "+k3);
+  document.write("</br></br>");
+  document.write("访问磁道顺序为:");
+}
+
+}
+</script>
+
+
+</head>
+
+<body>
+
+
+
+<form>
+
+
+<p>要访问的磁道号1：<input type = "text" name = "next" id="next0"></p>
+<p>要访问的磁道号2：<input type = "text" name = "next" id="next1"></p>
+<p>要访问的磁道号3：<input type = "text" name = "next" id="next2"></p>
+<p>要访问的磁道号4：<input type = "text" name = "next" id="next3"></p>
+<p>要访问的磁道号5：<input type = "text" name = "next" id="next4"></p>
+<p>要访问的磁道号6：<input type = "text" name = "next" id="next5"></p>
+
+
+<p>选择调度方法：</p>
+<p><input type="radio" name = "调度算法" id="FCFS" checked="checked">先来先服务<br />
+   <input type="radio" name = "调度算法" id="SSTF">最短寻道时间优先<br />
+   <input type="radio" name = "调度算法" id="SCAN">扫描</p>
+<p><input type="button" value="提交" onClick="shot()"></p>
+
+
+</form>
+
+</body>
+
+</html>
